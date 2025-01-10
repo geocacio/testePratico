@@ -38,12 +38,13 @@ const loadUsers = async () => {
 
 const handleCreateUser = async (data) => {
     try {
-        const newUser = await createUser(data);
-        loadUsers();
-        return newUser;
+        const response = await createUser(data);
+        if(response.status === 'success'){
+            window.location.href = 'index.html';
+        }
     } catch (error) {
-        console.error('Error:', error);
-        return { status: 'error', message: 'Failed to create user' };
+        window.location.reload();
+        return error;
     }
 }
 

@@ -66,25 +66,19 @@ window.onclick = function (event) {
 handleAlertMessage = () => {    
     const alertMessage = localStorage.getItem('alertMessage');
     if(alertMessage){
-        customAlertMessage(alertMessage);
+        showToast(JSON.parse(alertMessage));
         localStorage.removeItem('alertMessage');
     }
 }
 
-const customAlertMessage = (message) => {
-    const alert = document.querySelector('.alert');
-    if (alert) {
-    }
-}
-
-const showToast = (message, type = 'success') => {
+const showToast = (alertMessage) => {
     const toast = document.createElement('div');
 
-    toast.classList.add('toast', 'show', type);
+    toast.classList.add('toast', 'show', alertMessage.status);
 
     const title = document.createElement('h4');
     title.classList.add('titleToast');
-    title.textContent = message
+    title.textContent = alertMessage.message
 
     const closeButton = document.createElement('button');
     closeButton.innerHTML = `
@@ -138,7 +132,9 @@ window.validateInput = (input) => {
     }
 
     input.classList.toggle('validated', !isValid);
-    errorSpan.style.display = isValid ? 'none' : 'block';
+    if (errorSpan) {
+        errorSpan.style.display = isValid ? 'none' : 'block';
+    }
     return isValid;
 };
 
@@ -182,3 +178,7 @@ window.validateForm = (isUpdate = false) => {
 
     return isValidForm;
 };
+
+const goTo = (url) => {
+    handleAlertMessage();
+}

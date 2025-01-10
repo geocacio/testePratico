@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class StoreUserRequest extends FormRequest
 {
@@ -17,7 +19,7 @@ class StoreUserRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, mixed>
      */
     public function rules(): array
     {
@@ -40,7 +42,24 @@ class StoreUserRequest extends FormRequest
             'email.required' => 'Email is required',
             'email.email' => 'Email is invalid',
             'email.unique' => 'Email must be unique',
-            'password.required' => 'Password is required',
+            'password.min' => 'Password must be at least 6 characters',
+            'password.confirmed' => 'Password confirmation does not match',
         ];
+    }
+
+    /**
+     * Handle a failed validation attempt.
+     *
+     * @param  \Illuminate\Contracts\Validation\Validator  $validator
+     * @return void
+     *
+     */
+    protected function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response()->json([
+            'success' => false,
+            'message' => 'Erro de validação',
+            'errors' => $validator->errors()
+        ], 422));
     }
 }

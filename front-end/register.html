@@ -16,7 +16,7 @@
         </ul>
         <div class="lastBoxNav">
             <button type="button" class="themeMode" onclick="toggleTheme()"></button>
-            <a href="/register.html" class="btnRegister">Cadastre-se</a>
+            <a href="/front-end/register.html" class="btnRegister">Cadastre-se</a>
         </div>
     </nav>
     <section class="sectionContainer">
@@ -47,6 +47,9 @@
             </form>
         </div>
     </section>
+
+    <div id="toast-container">
+    </div>
     
     <script src="assets/js/index.js"></script>
     <script src="assets/js/controller.js" type="module"></script>
@@ -54,20 +57,20 @@
         import { handleCreateUser } from './assets/js/controller.js';
         document.getElementById('registerForm').addEventListener('submit', async (event) => {
             event.preventDefault();
-            if (!validateForm()) {
-                return;
-            }
-            const password = document.getElementById('password').value;
-            const data = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                password: document.getElementById('password').value,
-                password_confirmation: document.getElementById('password_confirmation').value
-            }
-            const response = await handleCreateUser(data);
-            if (response.status === 'success') {
-                localStorage.setItem('alertMessage', 'Usuário cadastrado com sucesso!');
-                window.location.href = 'index.html';
+            try {
+                if (!validateForm()) {
+                    return;
+                }
+                const data = {
+                    name: document.getElementById('name').value,
+                    email: document.getElementById('email').value,
+                    password: document.getElementById('password').value,
+                    password_confirmation: document.getElementById('password_confirmation').value
+                };
+                const result = await handleCreateUser(data);
+            } catch (error) {
+                localStorage.setItem('alertMessage', 'Erro ao criar usuário!');
+                hanleAlertMessage();
             }
         });
     </script>

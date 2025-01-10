@@ -107,28 +107,35 @@
 
         document.getElementById('form-user').addEventListener('submit', async (event) => {
             event.preventDefault();
-            if (!validateForm(true)) {
-                return;
-            }
-            const data = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                password: document.getElementById('password').value
-            }
+            try{
+                if (!validateForm(true)) {
+                    return;
+                }
+                const data = {
+                    name: document.getElementById('name').value,
+                    email: document.getElementById('email').value,
+                    password: document.getElementById('password').value
+                }
 
-            const response = await handleUpdateUser(document.getElementById('id').value, data);
-            if (response.status === 'success') {
-                
+                const response = await handleUpdateUser(document.getElementById('id').value, data);
                 localStorage.setItem('alertMessage', 'Usuário atualizado com sucesso!');
-                window.location.reload();
+                handleAlertMessage();
+            } catch (error) {
+                localStorage.setItem('alertMessage', 'Erro ao atualizar usuário!');
+                handleAlertMessage();
             }
         });
 
         document.getElementById('confirmationDeleteUser').addEventListener('click', async (event) => {
             event.preventDefault();
-            confirmationDeleteUser();
-            localStorage.setItem('alertMessage', 'Usuário excluído com sucesso!');
-            handleAlertMessage();
+            try{
+                const response = await handleDeleteUser(document.getElementById('id').value);
+                localStorage.setItem('alertMessage', 'Usuário excluído com sucesso!');
+                handleAlertMessage();
+            } catch (error) {
+                localStorage.setItem('alertMessage', 'Erro ao excluir usuário!');
+                handleAlertMessage();
+            }
         });
 
     </script>

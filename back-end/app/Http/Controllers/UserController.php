@@ -9,6 +9,7 @@ use App\Interfaces\UserRepositoryInterface;
 use App\Models\User;
 use App\Utils\DefaultResponse;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
 {
@@ -39,7 +40,7 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-        try{
+        try {
             DB::beginTransaction();
             $payload = $request->validated();
 
@@ -47,6 +48,10 @@ class UserController extends Controller
 
             DB::commit();
             return $this->defaultResponse->successWithContent('User created successfully', 201, $user);
+            
+        } catch (ValidationException $e) {
+            DB::rollBack();
+            return response()->json(['status' => 'error', 'message' => $e->errors()], 422);
         } catch (\Exception $e) {
             DB::rollBack();
             throw new CustomException($e->getMessage(), $e->getCode());
@@ -63,7 +68,7 @@ class UserController extends Controller
             $payload = $request->validated();
             if(isset($payload['password'])) {
                 $payload['password'] = bcrypt($payload['password']);
-            }else {
+            } else {
                 unset($payload['password']);
             }
 
@@ -71,6 +76,10 @@ class UserController extends Controller
 
             DB::commit();
             return $this->defaultResponse->successWithContent('User updated successfully', 200, $user);
+
+        } catch (ValidationException $e) {
+            DB::rollBack();
+            return response()->json(['status' => 'error', 'message' => $e->errors()], 422);
         } catch (\Exception $e) {
             DB::rollBack();
             throw new CustomException($e->getMessage(), $e->getCode());
