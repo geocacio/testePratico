@@ -15,6 +15,10 @@ const loadUsers = async () => {
             return;
         }
         usersList.innerHTML = '';
+        if (users.length === 0) {
+            usersList.innerHTML = '<tr><td colspan="3">Nenhum usuário cadastrado</td></tr>';
+            return;
+        }
         users.forEach(user => {
             const userRow = document.createElement('tr');
             userRow.innerHTML = `

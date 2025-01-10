@@ -1,12 +1,3 @@
-// const toggleModal = () => {
-//     const modal = document.querySelector('.modal');    
-//     if(modal.classList.contains('isOpen')){
-//         modal.classList.remove('isOpen');
-//     }else{
-//         modal.classList.add('isOpen');
-//     }
-// }
-
 const toggleModal = (modalSelector) => {
     const modal = document.querySelector(modalSelector);    
     modal.classList.toggle('isOpen');
@@ -26,7 +17,6 @@ const moonIcon = `
     </svg>
 `;
 
-// let themeCache = null;
 document.addEventListener('DOMContentLoaded', () => {
     const currentTheme = localStorage.getItem('theme') ?? 'day';
     toggleTheme(currentTheme)
