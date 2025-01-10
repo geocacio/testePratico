@@ -137,7 +137,32 @@ window.validateInput = (input) => {
         errorSpan.textContent = isValid ? '' : 'As senhas não coincidem!';
     }
 
-    // input.classList.toggle('invalid', !isValid);
+    input.classList.toggle('validated', !isValid);
+    errorSpan.style.display = isValid ? 'none' : 'block';
+    return isValid;
+};
+
+window.validateUpdateInput = (input) => {
+    const value = input.value.trim();
+    const errorSpan = input.nextElementSibling;
+    let isValid = true;
+
+    if (input.name === 'name') {
+        isValid = value !== '';
+        errorSpan.textContent = isValid ? '' : 'O nome é obrigatório!';
+    } else if (input.name === 'email') {
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        isValid = emailPattern.test(value);
+        errorSpan.textContent = isValid ? '' : 'Digite um email válido!';
+    } else if (input.name === 'password') {
+        isValid = value === '' || value.length >= 6;
+        errorSpan.textContent = isValid ? '' : 'A senha deve ter no minímo 6 digítos!';
+    } else if (input.name === 'password_confirmation') {
+        const password = document.getElementById('password').value;
+        isValid = password === '' || value === password;
+        errorSpan.textContent = isValid ? '' : 'As senhas não coincidem!';
+    }
+
     input.classList.toggle('validated', !isValid);
     errorSpan.style.display = isValid ? 'none' : 'block';
     return isValid;

@@ -50,18 +50,23 @@
 
                         <div class="groupInput">
                             <label for="name">Nome</label>
-                            <input type="text" name="name" class="inputStyle validated" id="name" placeholder="Digite seu nome"/>
-                            <span class="inputValidate">O nome é obrigatório!</span>
+                            <input type="text" name="name" class="inputStyle" id="name" placeholder="Digite seu nome" onblur="validateUpdateInput(this)"/>
+                            <span class="inputValidate"></span>
                         </div>
                         <div class="groupInput">
                             <label for="email">E-mail</label>
-                            <input type="email" name="email" class="inputStyle" id="email" placeholder="example@example.com"/>
-                            <span class="inputValidate">Digite um email válido!</span>
+                            <input type="email" name="email" class="inputStyle" id="email" placeholder="example@example.com" onblur="validateUpdateInput(this)"/>
+                            <span class="inputValidate"></span>
                         </div>
                         <div class="groupInput">
                             <label for="password">Senha</label>
-                            <input type="password" name="password" class="inputStyle" id="password" placeholder="Digite a sua melhor senha"/>
-                            <span class="inputValidate">A senha deve ter no minímo 6 digítos!</span>
+                            <input type="password" name="password" class="inputStyle" id="password" placeholder="Digite a sua melhor senha" onblur="validateUpdateInput(this)"/>
+                            <span class="inputValidate"></span>
+                        </div>
+                        <div class="groupInput">
+                            <label for="password_confirmation">Confirme a Senha</label>
+                            <input type="password" name="password_confirmation" class="inputStyle" id="password_confirmation" placeholder="Confirme a sua senha" onblur="validateUpdateInput(this)"/>
+                            <span class="inputValidate"></span>
                         </div>
                         <div class="footerForm">
                             <button class="buttonStyle danger" type="button" onclick="toggleModal('.editModal')">Cancelar</button>
