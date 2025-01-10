@@ -54,6 +54,9 @@
         import { handleCreateUser } from './assets/js/controller.js';
         document.getElementById('registerForm').addEventListener('submit', async (event) => {
             event.preventDefault();
+            if (!validateForm()) {
+                return;
+            }
             const password = document.getElementById('password').value;
             const data = {
                 name: document.getElementById('name').value,

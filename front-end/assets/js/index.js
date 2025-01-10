@@ -167,3 +167,18 @@ window.validateUpdateInput = (input) => {
     errorSpan.style.display = isValid ? 'none' : 'block';
     return isValid;
 };
+
+window.validateForm = (isUpdate = false) => {
+    const form = isUpdate ? document.getElementById('form-user') : document.getElementById('registerForm');
+    const inputs = form.querySelectorAll('input');
+    let isValidForm = true;
+
+    inputs.forEach(input => {
+        const isValid = isUpdate ? validateUpdateInput(input) : validateInput(input);
+        if (!isValid) {
+            isValidForm = false;
+        }
+    });
+
+    return isValidForm;
+};

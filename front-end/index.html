@@ -107,7 +107,9 @@
 
         document.getElementById('form-user').addEventListener('submit', async (event) => {
             event.preventDefault();
-
+            if (!validateForm(true)) {
+                return;
+            }
             const data = {
                 name: document.getElementById('name').value,
                 email: document.getElementById('email').value,
