@@ -61,13 +61,6 @@ let currentDeleteId = null;
 const handleDeleteUser = async (id) => {
     currentDeleteId = id;
     toggleModal('.deleteModal');
-    // try {
-    //     const deletedUser = await deleteUser(id);
-    //     console.log('User deleted:', deletedUser);
-    //     loadUsers();
-    // } catch (error) {
-    //     console.error('Error:', error);
-    // }
 }
 
 const confirmationDeleteUser = async () => {
@@ -89,8 +82,6 @@ const cancelDeleteuser = () => {
 
 const updateUserModal = (user) => {
     toggleModal('.editModal');
-    // const modal = document.querySelector('.modal');
-    // modal.classList.add('isOpen');
     const form = document.querySelector('#form-user');
     form.name.value = user.name;
     form.email.value = user.email;
