@@ -1,10 +1,15 @@
-const toggleModal = () => {
-    const modal = document.querySelector('.modal');    
-    if(modal.classList.contains('isOpen')){
-        modal.classList.remove('isOpen');
-    }else{
-        modal.classList.add('isOpen');
-    }
+// const toggleModal = () => {
+//     const modal = document.querySelector('.modal');    
+//     if(modal.classList.contains('isOpen')){
+//         modal.classList.remove('isOpen');
+//     }else{
+//         modal.classList.add('isOpen');
+//     }
+// }
+
+const toggleModal = (modalSelector) => {
+    const modal = document.querySelector(modalSelector);    
+    modal.classList.toggle('isOpen');
 }
 
 const button = document.querySelector('.themeMode');

@@ -17,7 +17,7 @@
         </ul>
         <div class="lastBoxNav">
             <button type="button" class="themeMode" onclick="toggleTheme()"></button>
-            <a href="/register.html" class="btnRegister">Cadastre-se</a>
+            <a href="/front-end/register.html" class="btnRegister">Cadastre-se</a>
         </div>
     </nav>
     <section class="sectionContainer">
@@ -80,23 +80,25 @@
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>alert-rhombus</title><path d="M12 2C11.5 2 11 2.19 10.59 2.59L2.59 10.59C1.8 11.37 1.8 12.63 2.59 13.41L10.59 21.41C11.37 22.2 12.63 22.2 13.41 21.41L21.41 13.41C22.2 12.63 22.2 11.37 21.41 10.59L13.41 2.59C13 2.19 12.5 2 12 2M11 7H13V13H11V7M11 15H13V17H11V15Z" /></svg>
                     <h4 class="titleDescription">Tem certeza que deseja excluir usuário?</h4>
                     <div class="footerForm">
-                        <button class="buttonStyle danger" type="button" onclick="toggleModal('.deleteModal')">Não</button>
-                        <button type="submit" class="buttonStyle success" data-bs-dismiss="modal" onclick="handleDelete('.modalSelector')">Sim</button>
+                        <button class="buttonStyle danger" type="button" onclick="cancelDeleteuser()">Não</button>
+                        <button type="submit" id="confirmationDeleteUser" class="buttonStyle success" data-bs-dismiss="modal">Sim</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
+
     <div id="toast-container">
     </div>
 
     <script src="assets/js/index.js"></script>
     <script src="assets/js/controller.js" type="module"></script>
     <script type="module">
-        import { updateUserModal, handleUpdateUser, handleDeleteUser } from './assets/js/controller.js';
+        import { updateUserModal, handleUpdateUser, handleDeleteUser, cancelDeleteuser, confirmationDeleteUser } from './assets/js/controller.js';
         window.updateUserModal = updateUserModal;
         window.handleDeleteUser = handleDeleteUser;
+        window.cancelDeleteuser = cancelDeleteuser;
+        window.confirmationDeleteUser = confirmationDeleteUser;
 
         document.getElementById('form-user').addEventListener('submit', async (event) => {
             event.preventDefault();
@@ -106,8 +108,20 @@
                 email: document.getElementById('email').value,
                 password: document.getElementById('password').value
             }
-            console.log('data', data);
+
             const response = await handleUpdateUser(document.getElementById('id').value, data);
+            if (response.status === 'success') {
+                
+                localStorage.setItem('alertMessage', 'Usuário atualizado com sucesso!');
+                window.location.reload();
+            }
+        });
+
+        document.getElementById('confirmationDeleteUser').addEventListener('click', async (event) => {
+            event.preventDefault();
+            confirmationDeleteUser();
+            localStorage.setItem('alertMessage', 'Usuário excluído com sucesso!');
+            handleAlertMessage();
         });
 
     </script>
