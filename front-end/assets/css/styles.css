@@ -1,0 +1,532 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+@font-face{
+    font-family: 'Rubik Vinyl';
+    src: url('../fonts/RubikVinyl-Regular.ttf') format('truetype');
+    font-weight: normal;
+}
+
+@font-face{
+    font-family: 'Poppins';
+    src: url('../fonts/Poppins-Regular.ttf') format('truetype');
+    font-weight: normal;
+}
+
+@font-face{
+    font-family: 'Poppins';
+    src: url('../fonts/Poppins-Medium.ttf') format('truetype');
+    font-weight: 500;
+}
+
+@font-face{
+    font-family: 'Poppins';
+    src: url('../fonts/Poppins-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+}
+
+:root{
+    --white: #fff;
+    --black: #000;
+    --primary: #141414;
+    --secondary: #2f2e2e;
+    --gray: #1a1a1a;
+    --white-gray: #a5a5a5;
+    --light-gray: #ccc;
+    --light-black: #0f0f0f;
+    --modal-blur: linear-gradient(180deg, rgba(0, 0, 0, 25%) 0%, rgba(0, 0, 0, 25%) 100%);
+    --bg-modal: var(--secondary);
+    --border-input: transparent;
+}
+
+body.dayMode {
+    --white: #1e1e1e; /* Cor mais suave para o fundo */
+    --black: #fff; /* Cor mais suave para o texto */
+    --primary: #ffffff; /* Branco para o fundo principal */
+    --secondary: #c0c0c0; /* Cor mais clara para elementos secundários */
+    --gray: #b0b0b0; /* Tom de cinza mais claro */
+    --white-gray: #a4a4a4; /* Cinza claro para detalhes */
+    --light-gray: #575757; /* Cinza suave para fundos e bordas */
+    --light-black: #ffffff; /* Preto mais suave */
+    --bg-modal: var(--black);
+    --border-input: var(--white-gray);
+}
+
+a{
+    text-decoration: none!important;
+}
+
+body{
+    padding: 0;
+    margin: 0;
+    background: var(--primary);
+    box-sizing: border-box;
+}
+
+#mainNav{
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 60px;
+    border-bottom: 1px solid var(--secondary);
+    background: var(--gray);
+    position: sticky;
+    top: 0;
+    right: 0;
+    left: 0;
+}
+
+#mainNav .logoUser{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Rubik Vinyl';
+    font-size: 30px;
+    color: var(--white);
+}
+
+#mainNav .navbar{
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#mainNav .navbar li{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+#mainNav .navbar li a{
+    font-family: 'Poppins';
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--white);
+    border-bottom: 3px solid transparent;
+    padding: 16px 0;
+    transition: 0.3s;
+}
+
+#mainNav .navbar li.active a, #mainNav .navbar li a:hover{
+    border-color: var(--white);
+}
+
+.btnRegister{
+    font-family: 'Poppins';
+    font-size: 14px;
+    font-weight: 400;
+    padding: 5px 15px;
+    color: var(--white);
+    border: 2px solid var(--white);
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.btnRegister:hover{
+    background: var(--white);
+    color: var(--gray);
+}
+
+.sectionContainer {
+    padding: 15px;
+    margin-top: 50px;
+}
+
+.boxRegister{
+    max-width: 400px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background: var(--gray);
+    border-radius: 15px;
+    padding: 60px 45px;
+    border: 1px solid var(--secondary);
+}
+
+.titlePage{
+    font-family: 'Poppins';
+    font-weight: 500;
+    font-size: 25px;
+    margin-top: 0;
+    color: var(--white);
+}
+
+.groupInput{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.groupInput label{
+    font-family: 'Montserrat';
+    font-size: 15px;
+    font-weight: normal;
+    color: var(--white);
+    margin-bottom: 5px;
+}
+
+.formStyle{
+    width: 100%;
+}
+
+.inputStyle{
+    font-family: 'Montserrat';
+    font-size: 14px;
+    font-weight: 500;
+    height: 42px;
+    width: 100%;
+    border-radius: 5px;
+    box-sizing: border-box;
+    border: none;
+    padding: 15px 10px;
+    border: 1px solid var(--border-input);
+    color: #000;
+}
+
+.inputStyle::placeholder{
+    color: var(--white-gray);
+}
+
+.inputStyle:focus{
+    outline: none;
+    border-color: var(--border-input);
+    box-shadow: none;
+}
+
+.inputStyle.validated{
+    border: 1px solid red!important;
+    color: red;
+}
+
+.inputValidate{
+    font-family: 'Montserrat';
+    display: block;
+    font-size: 12px;
+    color: red;
+    margin-top: 5px;
+    /* display: none; */
+}
+
+.btnSubmit{
+    display: block;
+    font-family: 'Poppins';
+    font-weight: 700;
+    font-size: 18px;
+    border-radius: 5px;
+    border: none;
+    width: 100%;
+    padding: 10px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    margin-top: 30px;
+    transition: 0.3s;
+    color: var(--gray);
+}
+
+.btnSubmit:hover{
+    background: var(--gray);
+    border-color: var(--white);
+    color: var(--white);
+}
+
+.boxTable{
+    max-width: 1200px;
+    margin: auto;
+}
+
+.table{
+    width: 100%;
+    border-spacing: 0;
+}
+
+.table thead tr th{
+    font-family: 'Poppins';
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--white);
+    background: var(--gray);
+    border: 0;
+    padding: 10px;
+    border: none;
+    border-top: 1px solid var(--secondary);
+    border-bottom: 1px solid var(--secondary);
+}
+
+.table thead tr th:first-child{
+    border-radius: 10px 0 0 0;
+    border-left: 1px solid var(--secondary);
+}
+
+.table thead tr th:last-child{
+    border-radius: 0 10px 0 0;
+    border-right: 1px solid var(--secondary);
+}
+
+.table tbody tr td{
+    font-family: 'Montserrat';
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--light-gray);
+    padding: 12px 10px;
+    text-align: center;
+    border-bottom: 1px solid var(--secondary);
+    background: var(--light-black);
+    transition: 0.3s;
+}
+
+.table tbody tr:hover td{
+    background: var(--secondary);
+}
+
+.table tbody tr td:first-child{
+    border-left: 1px solid var(--secondary);
+}
+
+.table tbody tr td:last-child{
+    border-right: 1px solid var(--secondary);
+}
+
+.btnAction{
+    background: transparent;
+    padding: 0;
+    border: none;
+}
+
+.btnAction svg{
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    stroke: var(--light-gray);
+    transition: 0.3s;
+}
+
+.btnAction:hover svg{
+    stroke: var(--white);
+}
+
+.table tbody tr td:last-child .btnAction:last-child{
+    margin-left: 10px;
+}
+
+.table tbody tr td:last-child .btnAction:last-child svg{
+    stroke: var(--black);
+    fill: var(--light-gray);
+}
+
+.table tbody tr td:last-child .btnAction:hover:last-child svg{
+    fill: var(--white);
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.modal {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow-y: auto;
+    background: var(--modal-blur);
+    backdrop-filter: blur(2px);
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.3s;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.modal.isOpen {
+    visibility: visible;
+    opacity: 1;
+}
+
+.modalContainer{
+    margin: auto;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 30px);
+    max-width: 500px;
+    position: relative;
+    -webkit-transform: translate(0, 0);
+    transform: translate(0, 0);
+}
+
+.modalContent{
+    background: var(--bg-modal);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    box-shadow: 3px 4px 36px -26px #000;
+}
+
+.headerModal{
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.titleModal{
+    font-family: 'Poppins';
+    font-weight: 500;
+    font-size: 20px;
+    width: 100%;
+    margin: 0;
+    text-align: center;
+    color: var(--white);
+}
+
+.bodyModal{
+    padding: 15px;
+}
+
+.footerForm{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.buttonStyle{
+    font-family: 'Montserrat';
+    font-size: 14px;
+    font-weight: 400;
+    padding: 8px 15px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    background: var(--white-gray);
+    color: var(--white);
+    transition: 0.3s;
+}
+
+.buttonStyle:hover{
+    background: var(--primary);
+}
+
+.buttonStyle.success{
+    background-color: #28a745;
+    color: #fff;
+}
+
+.buttonStyle.success:hover{
+    background-color: #218838;
+}
+
+.lastBoxNav{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.themeMode{
+    background: var(--primary);
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.themeMode svg{
+    width: 15px;
+    height: 15px;
+    fill: var(--white);
+}
+
+.titleDescription{
+    font-family: 'Montserrat';
+    font-weight: 500;
+    font-size: 15px;
+    margin-top: 0;
+    width: 100%;
+    text-align: center;
+    color: var(--white);
+}
+
+.modal.deleteModal .modalContainer{
+    max-width: 340px;
+}
+
+.modal.deleteModal .modalContainer svg{
+    width: 80px;
+    height: 80px;
+    margin: auto;
+    display: block;
+    fill: rgb(255, 44, 44);
+}
+
+#toast-container{
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 99999;
+    display: flex;
+    flex-direction: column;
+}
+
+.toast{
+    color: #fff;
+    padding: 30px 15px;
+    margin-top: 10px;
+    border-radius: 5px;
+    opacity: 0;
+    transform: translateX(20px);
+    transition: opacity 0.3s, transform 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.titleToast{
+    font-family: 'Montserrat';
+    font-weight: 400;
+    font-size: 15px;
+    margin: 0;
+}
+
+.toast button{
+    background: transparent;
+    padding: 0;
+    border: none;
+}
+
+.toast button svg{
+    width: 15px;
+    height: 15px;
+    fill: #fff;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.toast.success {
+    background-color: #4CAF50;
+}
+
+.toast.error {
+    background-color: #F44336;
+}

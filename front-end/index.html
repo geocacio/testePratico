@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/styles.css"/>
+    <title>User Sistem</title>
+    <meta name="env-API_URL" content="http://localhost:8000/api">
+</head>
+<body>
+    <nav id="mainNav">
+        <a href="/" class="logoUser">USERS</a>
+        <ul class="navbar">
+            <li class="active">
+                <a href="/">Usuários</a>
+            </li>
+        </ul>
+        <div class="lastBoxNav">
+            <button type="button" class="themeMode" onclick="toggleTheme()"></button>
+            <a href="/register.html" class="btnRegister">Cadastre-se</a>
+        </div>
+    </nav>
+    <section class="sectionContainer">
+        <div id="alertMessage" class="alertMessage" style="display: none;"></div>
+        <div class="boxTable">
+            <div class="alert"></div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>E-mail</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="users-list">
+                    <!-- User rows will be dynamically inserted here -->
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <div class="modal editModal">
+        <div class="modalContainer">
+            <div class="modalContent">
+                <div class="headerModal">
+                    <h1 class="titleModal">Editar usuário</h1>
+                </div>
+                <div class="bodyModal">
+                    <form id="form-user" action="" method="POST" class="formStyle">
+                        <input type="hidden" name="id" id="id" value=""/>
+
+                        <div class="groupInput">
+                            <label for="name">Nome</label>
+                            <input type="text" name="name" class="inputStyle validated" id="name" placeholder="Digite seu nome"/>
+                            <span class="inputValidate">O nome é obrigatório!</span>
+                        </div>
+                        <div class="groupInput">
+                            <label for="email">E-mail</label>
+                            <input type="email" name="email" class="inputStyle" id="email" placeholder="example@example.com"/>
+                            <span class="inputValidate">Digite um email válido!</span>
+                        </div>
+                        <div class="groupInput">
+                            <label for="password">Senha</label>
+                            <input type="password" name="password" class="inputStyle" id="password" placeholder="Digite a sua melhor senha"/>
+                            <span class="inputValidate">A senha deve ter no minímo 6 digítos!</span>
+                        </div>
+                        <div class="footerForm">
+                            <button class="buttonStyle danger" type="button" onclick="toggleModal()">Cancelar</button>
+                            <button type="submit" class="buttonStyle success" data-bs-dismiss="modal">Atualizar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal deleteModal">
+        <div class="modalContainer">
+            <div class="modalContent">
+                <div class="bodyModal">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>alert-rhombus</title><path d="M12 2C11.5 2 11 2.19 10.59 2.59L2.59 10.59C1.8 11.37 1.8 12.63 2.59 13.41L10.59 21.41C11.37 22.2 12.63 22.2 13.41 21.41L21.41 13.41C22.2 12.63 22.2 11.37 21.41 10.59L13.41 2.59C13 2.19 12.5 2 12 2M11 7H13V13H11V7M11 15H13V17H11V15Z" /></svg>
+                    <h4 class="titleDescription">Tem certeza que deseja excluir usuário?</h4>
+                    <div class="footerForm">
+                        <button class="buttonStyle danger" type="button" onclick="toggleModal('.deleteModal')">Não</button>
+                        <button type="submit" class="buttonStyle success" data-bs-dismiss="modal" onclick="handleDelete('.modalSelector')">Sim</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="toast-container">
+    </div>
+
+    <script src="assets/js/index.js"></script>
+    <script src="assets/js/controller.js" type="module"></script>
+    <script type="module">
+        import { updateUserModal, handleUpdateUser, handleDeleteUser } from './assets/js/controller.js';
+        window.updateUserModal = updateUserModal;
+        window.handleDeleteUser = handleDeleteUser;
+
+        document.getElementById('form-user').addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const data = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                password: document.getElementById('password').value
+            }
+            console.log('data', data);
+            const response = await handleUpdateUser(document.getElementById('id').value, data);
+        });
+
+    </script>
+    
+</body>
+</html>
