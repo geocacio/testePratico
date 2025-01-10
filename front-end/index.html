@@ -116,25 +116,18 @@
                     email: document.getElementById('email').value,
                     password: document.getElementById('password').value
                 }
-
+                
+                toggleModal('.editModal');
                 const response = await handleUpdateUser(document.getElementById('id').value, data);
-                localStorage.setItem('alertMessage', 'Usuário atualizado com sucesso!');
-                handleAlertMessage();
             } catch (error) {
-                localStorage.setItem('alertMessage', 'Erro ao atualizar usuário!');
-                handleAlertMessage();
             }
         });
 
         document.getElementById('confirmationDeleteUser').addEventListener('click', async (event) => {
             event.preventDefault();
             try{
-                const response = await handleDeleteUser(document.getElementById('id').value);
-                localStorage.setItem('alertMessage', 'Usuário excluído com sucesso!');
-                handleAlertMessage();
+                const response = await confirmationDeleteUser(document.getElementById('id').value);
             } catch (error) {
-                localStorage.setItem('alertMessage', 'Erro ao excluir usuário!');
-                handleAlertMessage();
             }
         });
 

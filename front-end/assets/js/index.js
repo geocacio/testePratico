@@ -56,13 +56,6 @@ const toggleTheme = (themeName = null) => {
     localStorage.setItem('theme', newThemeName)
 }
 
-window.onclick = function (event) {
-    const modal = document.querySelector('.modal');
-    if(event.target === modal){
-        modal.classList.remove('isOpen');
-    }
-}
-
 handleAlertMessage = () => {    
     const alertMessage = localStorage.getItem('alertMessage');
     if(alertMessage){

@@ -50,28 +50,32 @@ const handleCreateUser = async (data) => {
 
 const handleUpdateUser = async (id, data) => {
     try {
-        console.log('handleUpdateUser', data, id);
-        const updatedUser = await updateUser(id, data);
-        loadUsers();
+        const response = await updateUser(id, data);
+        if(response.status === 'success'){
+            window.location.reload();
+        }
     } catch (error) {
-        console.error('Error:', error);
+        window.location.reload();
+        return error;
     }
 }
 
 let currentDeleteId = null;
 const handleDeleteUser = async (id) => {
+    console.log('id', id);
     currentDeleteId = id;
     toggleModal('.deleteModal');
 }
 
 const confirmationDeleteUser = async () => {
     try {
-        const deletedUser = await deleteUser(currentDeleteId);
-        // showNotification('Usuário deletado com sucesso');
-        loadUsers();
+        await deleteUser(currentDeleteId);
+        currentDeleteId = null;
         toggleModal('.deleteModal');
+        window.location.reload();
     } catch (error) {
-        console.error('Error:', error);
+        window.location.reload();
+        return error;
     }
 }
 

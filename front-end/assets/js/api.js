@@ -28,51 +28,60 @@ const createUser = async (userData) => {
             body: JSON.stringify(userData)
         });
 
-        console.log('response', response.status);
-
         if (response.status === 422) {
             throw { status: 'error', message: 'Erro ao criar usuário' };
         }
-
-        console.log('response', response);
+        
         localStorage.setItem('alertMessage', JSON.stringify({ status: 'success', message: 'Usuário criado com sucesso' }));
         return { status: 'success', message: 'Usuário criado com sucesso' };
 
     } catch (error) {
-        console.error('Error:', error);
         localStorage.setItem('alertMessage', JSON.stringify({ status: 'error', message: 'Erro ao criar usuário' }));
         throw { status: 'error', message: 'Erro ao criar usuário' };
     }
 }
 
-const updateUser = async (id, userData) => {
-    try {
-        const response = await fetch(`${baseUrl}${endpoint.withId.replace('Id', id)}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(userData)
-        });
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.error('Error:', error);
-        throw error;
-    }
-}
+    const updateUser = async (id, userData) => {
+        try {
+            let response = await fetch(`${baseUrl}${endpoint.withId.replace('Id', id)}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(userData)
+            });
 
-const deleteUser = async (id) => {
-    try {
-        const response = await fetch(`${baseUrl}${endpoint.withId.replace('Id', id)}`, {
-            method: 'DELETE',
-        });
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.error('Error:', error);
-        throw error;
+            if (response.status === 422) {
+                throw { status: 'error', message: 'Erro ao atualizar usuário' };
+            }
+
+            localStorage.setItem('alertMessage', JSON.stringify({ status: 'success', message: 'Usuário atualizado com sucesso' }));
+            return { status: 'success', message: 'Usuário atualizado com sucesso' };
+
+        } catch (error) {
+            console.error('Error:', error);
+            localStorage.setItem('alertMessage', JSON.stringify({ status: 'error', message: 'Erro ao atualizar usuário' }));
+            throw { status: 'error', message: 'Erro ao atualizar usuário' };
+        }
     }
-}
+
+    const deleteUser = async (id) => {
+        try {
+            let response = await fetch(`${baseUrl}${endpoint.withId.replace('Id', id)}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            
+            localStorage.setItem('alertMessage', JSON.stringify({ status: 'success', message: 'Usuário deletado com sucesso' }));
+            return { status: 'success', message: 'Usuário deletado com sucesso' };
+
+        } catch (error) {
+            console.error('Error:', error);
+            localStorage.setItem('alertMessage', JSON.stringify({ status: 'error', message: 'Erro ao deletar usuário' }));
+            throw { status: 'error', message: 'Erro ao deletar usuário' };
+        }
+    }
 
 export { fetchUsers, createUser, updateUser, deleteUser };
